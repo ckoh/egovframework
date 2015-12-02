@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- scan -->
+	<context:component-scan base-package="user.dao,user.service"></context:component-scan>
+	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+
+	<!-- 메시지 리소스 번들 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<value>messages.user</value>
+		</property>
+	</bean>
+	
+	
+	<!-- 포인트 컷 -->
+	<bean id="u_advice" class="aop.Advice"></bean>
+	
+	<!-- aspect -->
+	<aop:config>
+		
+		<!--패턴  -->
+		<aop:pointcut expression="execution(* user.service.UserService.login(..))" id="pc" />
+		
+		<!-- 엮기 -->
+		<aop:aspect ref="u_advice">
+		
+			<!-- 
+			<aop:before method="before" pointcut-ref="pc"/>
+			
+			<aop:after-returning method="after_returning" pointcut-ref="pc" returning="obj"/>
+			
+			<aop:after method="after" pointcut-ref="pc"/>
+			
+			<aop:after-throwing method="after_throwing" pointcut-ref="pc" throwing="ex"/> -->
+			
+			<aop:around method="around" pointcut-ref="pc"/>
+			
+		</aop:aspect>
+		
+	</aop:config>
+</beans>

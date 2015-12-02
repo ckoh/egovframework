@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- 
+	<bean id="s" class="tv1.SamaungTV" init-method="init" lazy-init="true" />
+	<bean id="l" class="tv1.LgTV" scope="prototype" /> -->
+	
+	<!-- 내부 인스턴스 -->
+	<!-- <bean id="cal" class="java.util.Calendar" factory-method="getInstance"/> -->
+	
+	<!-- 
+	autowire="byName" :  -->
+	<bean id="dao" class="user.dao.UserDAO_JDBC"></bean>
+	<bean id="userDAO1"  class="user.dao.UserDAO_Spring"></bean>
+	<bean id="userDAO2" class="user.dao.UserDAO_iBatis"></bean>
+	<bean id="userDAO3" class="user.dao.UserDAO_MyBatis"></bean>
+	
+	<!-- 
+	autowire="byType" 주석 : defining beans [userDAO4,userDAO1,userDAO2,userDAO3,userService]
+	<bean id="userDAO1"  class="user.dao.UserDAO_Spring"></bean>
+	<bean id="userDAO2" class="user.dao.UserDAO_iBatis"></bean>
+	<bean id="userDAO3" class="user.dao.UserDAO_MyBatis"></bean> -->
+	
+	<!-- 
+	autowire="byName" / autowire="byType" set 인젝션임.   -->
+	
+	<bean id="userService"  class="user.service.UserServiceImpl" init-method="init" autowire="byName">
+		
+		<!-- dao 주입.
+		1
+		<constructor-arg ref="userDAO1"></constructor-arg>
+		2
+		<property name="dao" ref="userDAO4"></property> -->
+				
+	</bean>	
+	
+	<!-- vo 주입 테스트 -->
+	<!-- 
+	<bean id="userVO" class="user.vo.UserVO" p:address="p:address" >
+		<property name="username" value="홍길동"></property>
+		<property name="email" value="proits.co.kr"></property>
+	</bean> -->
+
+</beans>

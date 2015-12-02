@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<!-- <select id="selectBlog" resultType="Blog"> select * from Blog where id = #{id} </select> -->
+
+	<!-- 컬럼네임과 맵버 필드를 맞춘다. 좋치 않은 상황이군 -->
+	<resultMap type="user.vo.UserVO" id="sampel ">
+		<result property="userid" column="userid" />
+		<result property="username" column="username" />
+		<result property="userpwd" column="userpwd" />
+		<result property="email" column="email" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+	</resultMap>
+
+	<select id="getRowLogin" parameterType="user.vo.UserVO" resultType="user.vo.UserVO">
+		select * from userinfo where userid = #{userid} and userpwd
+		= #{userpwd}
+	</select>
+
+	<select id="getRow" parameterType="user.vo.UserVO" resultType="user.vo.UserVO">
+		select * from userinfo where userid = #{userid}
+	</select>
+
+
+	<!-- resultType="user.vo.UserVO" resultMap="sample" -->
+	<select id="getGrid" resultType="user.vo.UserVO">
+		select * from userinfo
+	</select>
+
+	<insert id="insertRow" parameterType="user.vo.UserVO">
+		insert into userinfo
+		(userid,
+		username,
+		userpwd,
+		email,
+		phone,
+		address) values (
+		#{userid},
+		#{username},
+		#{userpwd},
+		#{email},
+		#{phone},
+		#{address})
+	</insert>
+
+	<update id="updateRow" parameterType="user.vo.UserVO">
+		update userinfo set
+		email=#{email},phone=#{phone},address=#{address} where userid = #{userid}
+	</update>
+
+	<delete id="deleteRow">
+		<!-- parameterClass="string" -->
+		delete from userinfo where userid = #{userid}
+	</delete>
+	
+	<!-- parameterMap="hashMap" -->
+	<!-- 
+	<select id="searchRow1" resultType="user.vo.UserVO" parameterType="user.vo.UserVO">
+		select * from userinfo
+		<where>
+			<if test="username != null">
+				username like '%'||#{username}||'%'
+			</if>
+			<if test="userid != null">
+				username like '%'||#{userid}||'%'
+			</if>
+			<if test="email != null">
+				username like '%'||#{email}||'%'
+			</if>
+		</where>
+
+	</select> -->
+	
+	<!-- parameterMap="hashMap" -->
+	<!-- 
+	<select id="searchRow2" resultType="user.vo.UserVO" parameterMap="java.util.HashMap">
+		select * from userinfo
+		<where>
+			<if test="username != null">
+				username like '%'||#{username}||'%'
+			</if>
+			<if test="userid != null">
+				username like '%'||#{userid}||'%'
+			</if>
+			<if test="email != null">
+				username like '%'||#{email}||'%'
+			</if>
+		</where>
+
+	</select> -->
+</mapper>
