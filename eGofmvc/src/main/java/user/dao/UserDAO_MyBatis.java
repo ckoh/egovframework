@@ -58,16 +58,16 @@ public class UserDAO_MyBatis implements UserDAO {
 	@Override
 	public List<UserVO> getUserList() {
 		
-		 // 기본
-		 // return sqlSession.selectList("user.getGrid");
+		// 기본
+		return sqlSession.selectList("user.getGrid");
 		
 		// 인터페이스 기반 셀렉트
-		
+		/*
 		System.out.println("select Test");
 		
 		UserMapper mapper = sqlSession.getMapper(UserMapper.class);
 		
-		return mapper.list();
+		return mapper.list();*/
 	}
 
 	@Override
