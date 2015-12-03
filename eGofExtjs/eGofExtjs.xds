@@ -1,0 +1,48 @@
+{
+    "name": "eGofExtjs",
+    "settings": {
+        "cmd": {
+            "license": "commercial",
+            "cmdVersion": "5.1.3.61",
+            "frameworkVersion": "5.1.1.451"
+        },
+        "canvasControls": {
+            "viewportSize": {
+                "name": "Auto Expand",
+                "builtIn": true,
+                "height": null,
+                "width": null
+            }
+        },
+        "urlPrefix": "http://localhost/eGofExtjs/",
+        "exportPath": "E:/workspace/dev/eGovFrameDev/eGofmvc/src/main/webapp",
+        "spacesToIndent": 4,
+        "sdkPath": "",
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true,
+        "generateArchitectVersion": true,
+        "projectHasEnabledWebServer": false,
+        "lockUrlPrefix": true,
+        "installStatus": "Not Installed"
+    },
+    "xdsVersion": "3.2.0",
+    "xdsBuild": 339,
+    "schemaVersion": 1,
+    "upgradeVersion": 310000000001,
+    "framework": "ext51",
+    "viewOrderMap": {
+        "view": [],
+        "store": [],
+        "controller": [],
+        "model": [],
+        "resource": [
+            "dceba4cb-7c3a-448f-8e5b-731b846490c1",
+            "aad78fd0-688f-48e6-b88b-35c539a2a904"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

@@ -1,8 +1,29 @@
+# workspace project file
 .metadata
 */.project
 */.settings
-*/target
 */.classpath
 */.springBeans
+
+# projects
+eGof/target
+eGofmvc/target
+eTest_02_DI_AOP/target
+eTest_03_DB/target
+
+# etc project
 Servers
 RemoteSystemsTempFiles
+
+# sencha
+*/.sencha
+*/.architect
+eGofExtjs/build
+eGofExtjs/ext
+eGofExtjs/packages
+eGofExtjs/sass
+eGofExtjs/bootstrap.css
+eGofExtjs/bootstrap.js
+eGofExtjs/bootstrap.json
+eGofExtjs/build.settings
+eGofExtjs/build.xml

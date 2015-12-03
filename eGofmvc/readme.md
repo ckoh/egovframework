@@ -85,3 +85,22 @@ web xml
 
   controller/HelloController.java
 
+
+# spring mvc 본겨 설정
+ - mybatis 로딩 
+
+web.xml
+ - 리스터 / 클래스 로더
+
+
+# view 생성 .jsp 
+user_form.jsp
+user_list.jsp
+user_modify.jsp
+user_view.jsp
+user_write.jsp
+- 서비스 연동 
+
+- crud
+- commadn 객체 : view 단에서 까지 네임을 맞추면 자동 공유 ~~^^
+
