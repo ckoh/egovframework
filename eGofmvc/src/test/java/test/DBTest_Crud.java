@@ -28,17 +28,16 @@ public class DBTest_Crud {
 		userVO.setUserid("dbms_admin"/* userid */);
 		userVO.setUsername("dbms_admin"/* username */);
 		userVO.setUserpwd("dbms_admin"/* userpwd */);
-		//System.out.println("삽입 : " + service.addUser(userVO));
+		System.out.println("삽입 : " + service.addUser(userVO));
 
 		userVO = new UserVO();
 		userVO.setAddress("dbms_admin" /* address */);
 		userVO.setEmail("dbms_admin"/* email */);
 		userVO.setPhone("dbms_admin"/* phone */);
 		userVO.setUserid("dbms_admin"/* userid */);
-		//System.out.println("수정 : " + service.updateUser(userVO));
+		System.out.println("수정 : " + service.updateUser(userVO));
 		
 		userVO = new UserVO();
-		
 
 		userVO = service.getUser("dbms_admin");
 		System.out.println("한건: " + userVO);
