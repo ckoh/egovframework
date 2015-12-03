@@ -14,8 +14,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	
+	<%-- 
 	<%
-		// jdbc 기반 // 
+		// jsp-jdbc 기반 // 
 
 		// dao 접근 
 		UserDAO dao = new UserDAO_JDBC();
@@ -28,7 +30,7 @@
 
 		// request
 		request.setAttribute("users", list);
-	%>
+	%> --%>
 	<table border="1">
 		<tr>
 			<th>유저아이디</th>
