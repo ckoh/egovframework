@@ -16,5 +16,69 @@ board-WebApp
 		- jsp[배치가능..리졸버로 하려나.?]
 	- META-INF		
 	
+
+
+개발진행
+list.jsp 생성 : 하드코딩 jsp
+servlet/DispatcherServlet.java 생성
+	- java logic 추출 
+	- 서블릿 사용 [서블릿에서 맞김/상속함.]
+	- resqest 사용
 	
+
+# front controller 디자인 패턴 적용 : 진입점 중앙 집중. service 집중
+
+  <servlet>
+    <description></description>
+    <display-name>DispatcherServlet</display-name>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <servlet-class>servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <url-pattern>/DispatcherServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <description></description>
+    <display-name>DispatcherServlet</display-name>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <servlet-class>servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+# front controlle 패턴에 따른 핸들맵핑 클래스 :  집중된 service Controller 섞기.
+	- 확장 될 때 메모리에 등록 되겠 끔 한다.
+	- 기능을 위한 핸들러 맵핑
 	
+# Command 디자인 패턴 : 폴리모피즘.
+ - 서비스 사용을 추울
+
+
+# spring  
+web xml
+  <servlet>
+    <description></description>
+    <display-name>action</display-name>
+    <servlet-name>action</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+ - 파일 이름 
+  <servlet-name>action</servlet-name>
+  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+
+  - action +  DispatcherServlet
+
+- 파일 생성 
+  WEB-INF/action-servlet.xml
+
+  
