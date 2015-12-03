@@ -80,5 +80,8 @@ web xml
 
 - 파일 생성 
   WEB-INF/action-servlet.xml
+  - 뷰 리졸퍼
+  - 컨트롤러 스캔 [controller]
 
-  
+  controller/HelloController.java
+

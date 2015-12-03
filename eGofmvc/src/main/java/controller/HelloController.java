@@ -19,7 +19,7 @@ public class HelloController {
 		
 		ModelAndView view = new ModelAndView();
 		
-		view.addObject("data", "~~~~~");
+		view.addObject("data", "~~~   hello HelloController   ~~");
 		
 		return view;
 	}
