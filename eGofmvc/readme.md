@@ -90,8 +90,17 @@ web xml
  - mybatis 로딩 
 
 web.xml
- - 리스터 / 클래스 로더
+ - spring bean context 클래스 로더/리스터
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>classpath:applicationContext.xml</param-value>
+</context-param>
 
+<listener>
+	<listener-class>
+		org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+</listener>
 
 # view 생성 .jsp 
 user_form.jsp
@@ -104,3 +113,27 @@ user_write.jsp
 - crud
 - commadn 객체 : view 단에서 까지 네임을 맞추면 자동 공유 ~~^^
 
+
+# web.xml
+# 예외 처리
+ - 컨트롤러 단에서 @ExceptionHandler(value=Exception.class) 등록 
+ - 예외는 web.xml 등록하는 게  좋다.
+
+
+ # tomcat 올릴 때 같이 다 올림.
+ <!-- contextConfigLocation 서블릿 초기화. -->
+<init-param>
+  <param-name>contextConfigLocation</param-name>
+  <param-value>/WEB-INF/action-servlet.xml</param-value><!-- 이름 변경. -->
+</init-param>
+
+<!-- 톰캣 올릴 때 같이 올린다. 1은 뭐지. -->
+<load-on-startup>1</load-on-startup>
+
+# * 만약 꼬였 을 때 ...이클립스 
+E:\workspace\dev\eGovFrameDev\.metadata\.plugins\org.eclipse.wst.server.core
+E:\workspace\dev\eGovFrameDev\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost
+
+- 여기를 지워야 됨. 
+E:\workspace\dev\eGovFrameDev\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\eGofmvc_report\org\apache\jsp
+E:\workspace\dev\eGovFrameDev\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\eGofmvc_report\org\apache\jsp\WEB_002dINF\view\user

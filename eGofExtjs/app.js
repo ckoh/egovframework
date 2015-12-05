@@ -20,5 +20,13 @@ Ext.Loader.setConfig({
 
 
 Ext.application({
-    name: 'Egof'
+    views: [
+        'MyViewport'
+    ],
+    name: 'Egof',
+
+    launch: function() {
+        Ext.create('Egof.view.MyViewport');
+    }
+
 });

@@ -6,7 +6,10 @@
     },
     "codeClass": null,
     "userConfig": {
-        "name": "Egof"
+        "name": "Egof",
+        "views": [
+            "MyViewport"
+        ]
     },
     "name": "Application",
     "designerId": "application"

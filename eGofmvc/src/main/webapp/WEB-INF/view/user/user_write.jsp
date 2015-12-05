@@ -1,4 +1,6 @@
 <%@page contentType="text/html; charset=utf-8" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 <title>사용자 관리</title>
@@ -37,38 +39,56 @@ function userList() {
 		  <tr>
 			<td width=100 align=center bgcolor="E6ECDE" height="22">사용자 아이디</td>
 			<td width=490 bgcolor="ffffff" style="padding-left:10">
-				<input type="text" style="width:150" name="userid">
+				<input type="text" style="width:150" name="userid" value="${user.userid }" />
+				<font color="red">
+					<form:errors path="user.userid"></form:errors>
+				</font>
 			</td>
 		  </tr>
 		  <tr>
 			<td width=100 align=center bgcolor="E6ECDE" height="22">비밀번호</td>
 			<td width=490 bgcolor="ffffff" style="padding-left:10">
-				<input type="password" style="width:150" name="userpwd">
+				<input type="password" style="width:150" name="userpwd" value="${user.userpwd }" />
+				<font color="red">
+					<form:errors path="user.userpwd"></form:errors>
+				</font>
 			</td>
 		  </tr>
 		  
 		  <tr>
 			<td width=100 align=center bgcolor="E6ECDE" height="22">이름</td>
 			<td width=490 bgcolor="ffffff" style="padding-left:10">
-				<input type="text" style="width:240" name="username">
+				<input type="text" style="width:240" name="username" value="${user.username }" />
+				<font color="red">
+					<form:errors path="user.username"></form:errors>
+				</font>
 			</td>
 		  </tr>
 		  <tr>
 			<td width=100 align=center bgcolor="E6ECDE" height="22">이메일 주소</td>
 			<td width=490 bgcolor="ffffff" style="padding-left:10">
-				<input type="text" style="width:240" name="email">
+				<input type="text" style="width:240" name="email" value="${user.email }" />
+				<font color="red">
+					<form:errors path="user.email"></form:errors>
+				</font>
 			</td>
 		  </tr>		
 		  <tr>
 			<td width=100 align=center bgcolor="E6ECDE" height="22">전화 번호</td>
 			<td width=490 bgcolor="ffffff" style="padding-left:10">
-				<input type="text" style="width:240" name="phone">
+				<input type="text" style="width:240" name="phone" value="${user.phone }" />
+				<font color="red">
+					<form:errors path="user.phone"></form:errors>
+				</font>
 			</td>
 		  </tr>		
 		  <tr>
 			<td width=100 align=center bgcolor="E6ECDE" height="22">주    소</td>
 			<td width=490 bgcolor="ffffff" style="padding-left:10">
-				<input type="text" style="width:240" name="address">
+				<input type="text" style="width:240" name="address" value="${user.address }"/>
+				<font color="red">
+					<form:errors path="user.address"></form:errors>
+				</font>
 			</td>
 		  </tr>		
 	  </table>

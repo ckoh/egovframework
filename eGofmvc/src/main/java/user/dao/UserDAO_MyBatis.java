@@ -7,7 +7,10 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
 import sqlmapper.UserMapper;
 import user.vo.UserVO;
 
@@ -17,12 +20,16 @@ import user.vo.UserVO;
  *
  */
 @Component("mybatis")
-public class UserDAO_MyBatis implements UserDAO {
-
+public class UserDAO_MyBatis /*extends EgovAbstractMapper*/ implements UserDAO {
+	
+	/**
+	 * egov면 주석처리.
+	 */
 	@Autowired
 	SqlSession sqlSession;
 
 	public UserDAO_MyBatis() {
+		
 		System.out.println("create UserDAO_MyBatis");
 	}
 
@@ -75,7 +82,8 @@ public class UserDAO_MyBatis implements UserDAO {
 
 		return sqlSession.update("user.deleteRow", id);
 	}
-
+	
+	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override
 	public int addUser(UserVO userVO) {
 

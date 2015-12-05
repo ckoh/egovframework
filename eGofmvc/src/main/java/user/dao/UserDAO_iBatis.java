@@ -9,13 +9,14 @@ import org.springframework.stereotype.Repository;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
 
+import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
 import user.vo.UserVO;
 
 // @Component("ibatis")
 @Repository("ibatis")
-public class UserDAO_iBatis implements UserDAO{
+public class UserDAO_iBatis extends EgovAbstractDAO implements UserDAO{
 	
-	/*sql*/
+	/*sql : 전자정부면 안에 셋터 있음.*/
 	@Autowired
 	SqlMapClient sqlMapClient;
 	
@@ -107,6 +108,10 @@ public class UserDAO_iBatis implements UserDAO{
 
 	@Override
 	public int addUser(UserVO userVO) {
+		
+		
+		// 전자 정보용 insert
+		// insert("insertRow", userVO);
 		
 		int row = -1;
 		try {

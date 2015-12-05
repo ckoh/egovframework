@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.catalina.connector.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import user.service.UserService;
 import user.vo.UserVO;
+import validate.UserValidater;
 
 @Controller
 public class UserController {
@@ -112,11 +115,21 @@ public class UserController {
 	 */
 	@RequestMapping(value = "/user/add.do", method = RequestMethod.POST)
 	// public ModelAndView userAdd(HttpServletRequest params) {
-	public ModelAndView userAdd(UserVO params) {
+	public ModelAndView userAdd(@ModelAttribute("user") UserVO params, BindingResult errors) {
 
 		System.out.println("userAdd UserController : " + params);
-
 		ModelAndView view = new ModelAndView();
+		
+		/**
+		 * validate 체크 후 BindingResult errors 에서 관리.
+		 */
+		// 검증
+		new UserValidater().validate(params, errors);
+		
+		if(errors.hasErrors()){
+			view.setViewName("user/user_write");
+			return view;
+		}
 
 		/*
 		 * UserVO user = new UserVO(); user.setAddress(
@@ -149,12 +162,58 @@ public class UserController {
 		System.out.println("getUser UserController : " + params);
 
 		UserVO user = service.getUser(params.getUserid());
-
+		
 		ModelAndView view = new ModelAndView();
 		view.addObject("user", user);
 		view.setViewName("user/user_view");
 
 		return view;
 
+	}
+	
+	/**
+	 * 삭제
+	 * @param params
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value="/user/remove.do")
+	public ModelAndView removeUser(UserVO params) throws Exception {
+		
+		System.out.println("removeUser UserController : " + params);
+		
+		// exception 테스트
+		if(true){
+			throw new Exception("Test exception removeUser UserController");
+		}
+		
+		ModelAndView view = new ModelAndView();
+		
+		int removeUser = service.removeUser(params.getUserid());
+		
+		view.setViewName("redirect:/user/list.do");
+		
+		return view;
+	}
+	
+	
+	/**
+	 * 에러 캐치
+	 * 
+	 * 예외 처리 페이지
+	 * @return
+	 */
+	@ExceptionHandler(value=Exception.class)
+	public String exception() {
+		
+		/*
+			<error-page>
+		  	<error-code>404</error-code>
+		  	<location>/error_404.jsp</location><!-- 스프링 관리 아님. -->
+		  </error-page>*/
+		
+		System.out.println("exception UserController : "/* + params*/);
+		return "error";
+		
 	}
 }

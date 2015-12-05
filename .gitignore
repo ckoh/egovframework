@@ -8,12 +8,21 @@
 # projects
 eGof/target
 eGofmvc/target
-eTest_02_DI_AOP/target
-eTest_03_DB/target
+
+# ---
+# eTest_02_DI_AOP/target
+# eTest_03_DB/target
+# eTest_04_MVC/target
+
+eTest_02_DI_AOP
+eTest_03_DB
+eTest_04_MVC
 
 # etc project
 Servers
 RemoteSystemsTempFiles
+product
+sample
 
 # sencha
 */.sencha
@@ -27,3 +36,10 @@ eGofExtjs/bootstrap.js
 eGofExtjs/bootstrap.json
 eGofExtjs/build.settings
 eGofExtjs/build.xml
+
+# sencha build
+eGofmvc/src/main/webapp/resources
+eGofmvc/src/main/webapp/app.js
+eGofmvc/src/main/webapp/app.json
+eGofmvc/src/main/webapp/index.html
+eGofmvc/src/main/webapp/

@@ -25,7 +25,11 @@
         "generateArchitectVersion": true,
         "projectHasEnabledWebServer": false,
         "lockUrlPrefix": true,
-        "installStatus": "Not Installed"
+        "installStatus": "Not Installed",
+        "lastBuildSelection": {
+            "value": "webBuild",
+            "display": "Build web app"
+        }
     },
     "xdsVersion": "3.2.0",
     "xdsBuild": 339,
@@ -33,7 +37,11 @@
     "upgradeVersion": 310000000001,
     "framework": "ext51",
     "viewOrderMap": {
-        "view": [],
+        "view": [
+            "1c18f27c-d91a-44ac-b473-5832421e6275",
+            "22b99dd5-2290-418f-9f8d-8f68f82d6563",
+            "c4846183-602e-4af0-924c-62b095b3e407"
+        ],
         "store": [],
         "controller": [],
         "model": [],
