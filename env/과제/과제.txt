@@ -1,0 +1,47 @@
+
+참고하세요
+
+1. eGovFrame Web Project 생성 (project명 : product)
+
+2. pom.xml에 oracle driver, mybatis 등 dependency 설정
+3. web.xml에 FilterEncoding과 DispatcherServlet 추가
+4. 스프링 설정 파일에 annotation기반 설정과 DataSource 빈 설정,
+SqlSessionFactoryBean, SqlSessionTemplate 빈 설정, viewResolver 빈 설정
+5. product 테이블 생성
+
+sqlplus hr/hr
+
+drop table products purge;
+
+create table products (
+pcode   varchar2(10) constraint products_pk primary key,
+pname   varchar2(30),
+price   number(8),
+quant   number(5),
+pdesc  varchar2(200)
+);
+
+insert into products 
+values ('p001', 'Gallexy5', 1000000, 100, 
+'안드로이드폰1');
+
+insert into products 
+values ('p002', 'LG Gram', 1000000, 300, 
+'999gram 울트라 노트북');
+
+commit;
+
+ 
+
+7. MyBatis 연동을 위한 sql  mapper 파일 작성  
+8. view페이지 (JSP페이지는 /WEB-INF/view/ 아래 저장)
+9. ProductVO.java 생성(Value Object  : product패키지 아래)
+10. ProductService.java , ProductServiceImpl.java 생성(product패키지 아래)
+11. ProductDAOImpl.java생성 (product패키지 아래)
+12. ProductController 구현
+
+ 
+
+  product.zip 과제 제출합니다.
+
+

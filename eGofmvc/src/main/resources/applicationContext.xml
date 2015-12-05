@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- bean scan -->
+	<context:component-scan base-package="user,aop,tx"></context:component-scan>
+
+	<!-- aop -->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<!-- tx 어노테이션 기반. -->
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<!-- db관리 : 내부적으로 커넥션 관리하는데.. -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="oracle.jdbc.OracleDriver" 
+		p:url="jdbc:oracle:thin:@70.12.112.130:1521:xe"
+		p:username="hr" 
+		p:password="hr">
+	</bean>
+	
+	<!-- tx 등록/설정 -->
+	<!-- 
+	<bean id="txMannger" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		
+		<property name="dataSource" ref="dataSource"></property>
+	</bean> 
+	
+	tx 에서 advice
+	<tx:advice id="txAdvice" transaction-manager="txMannger">
+		<tx:attributes>
+			<tx:method name="add" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* tx.*.add(..))" id="pc"/>
+		<aop:advisor advice-ref="txAdvice"/>
+	</aop:config> -->
+	
+	<!--  트랜잭션 설정 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<!-- AOP 기반의 트랜잭션 설정 -->
+	<!-- 
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut id="pc" expression="execution(* tx.*.add*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pc" />
+	</aop:config> -->
+		
+	<!-- public JdbcTemplate(DataSource dataSource, boolean lazyInit) -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" autowire="default">
+		<constructor-arg ref="dataSource"></constructor-arg>
+		<constructor-arg value="true"></constructor-arg>
+	</bean>
+	
+	<!-- ibatis  
+	id="sqlMapClient" 전자 정부에서 고정임. -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:ibatis_config.xml"></property>
+	</bean>
+	
+	<!-- mybatis frame 설정 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 환경설정 등록 -->
+		<property name="configLocation" value="classpath:/mybatis_config.xml"></property>
+		<!-- 맵퍼 바로 등록 -->
+		<property name="mapperLocations" value="classpath:mapper/user_mybatis.xml"></property>
+		
+	</bean>
+	<!-- mybatis 빈 주입 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
+	</bean>
+
+	<!-- 메시지 리소스 번들 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<value>messages.user</value>
+		</property>
+	</bean>
+
+</beans>

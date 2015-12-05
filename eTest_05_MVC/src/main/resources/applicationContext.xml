@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+   <context:component-scan base-package="user,aop,tx"/>
+   <aop:aspectj-autoproxy/>
+   <tx:annotation-driven transaction-manager="txManager"/>
+   
+   <bean id="dataSource" 
+         class="org.apache.commons.dbcp.BasicDataSource"
+         p:driverClassName="oracle.jdbc.OracleDriver" 
+         p:url="jdbc:oracle:thin:@localhost:1521:xe" 
+         p:username="hr"
+         p:password="hr">
+   </bean>
+   
+   <!--  트랜잭션 설정 -->
+   <bean id="txManager"
+         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+         <property name="dataSource" ref="dataSource" />
+   </bean>
+   
+   <!-- AOP 기반의 트랜잭션 설정 -->
+   <!-- <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+           <tx:method name="add*" propagation="REQUIRED"/>
+        </tx:attributes>
+   </tx:advice>
+   
+   <aop:config>
+        <aop:pointcut id="pc" 
+                      expression="execution(* tx.*.add*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pc"/>
+   </aop:config>
+    -->
+   
+   
+   <!-- MyBatis 환경 설정 -->
+   <bean id="sqlSessionFactoryBean"
+         class="org.mybatis.spring.SqlSessionFactoryBean">
+         <property name="dataSource" ref="dataSource"/>
+         <property name="configLocation" 
+                   value="classpath:/mybatis_config.xml" />
+         <property name="mapperLocations" 
+                   value="classpath:/mapper/user_mybatis.xml" />
+   </bean>
+   <bean id="sqlSession"
+         class="org.mybatis.spring.SqlSessionTemplate">
+         <constructor-arg index="0" ref="sqlSessionFactoryBean"/>
+   </bean>
+   
+   
+   <!-- iBatis 환경 설정 -->
+   <bean id="sqlMapClient"
+         class="org.springframework.orm.ibatis.SqlMapClientFactoryBean" >
+        <property name="dataSource"  ref="dataSource"/>
+        <property name="configLocations" 
+                  value="classpath:ibatis_config.xml"/>
+   </bean>
+   
+   <!--  Spring 기반 DB 설정 -->
+   <bean id="jdbcTemplate" 
+         class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/> 
+   </bean>
+   
+   
+   <bean id="messageSource" 
+ class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+             <value>messages.user</value>
+        </property>
+   </bean>
+   
+   <!-- <bean id="u_advice" class="aop.Advice"/>
+   <aop:config>
+       <aop:pointcut id="pc" 
+           expression="execution(* user.service.UserService.login(..))" />
+      
+       <aop:aspect ref="u_advice">
+           <aop:after-throwing method="log" 
+                       pointcut-ref="pc" throwing="ex"/>
+           <aop:around method="around" pointcut-ref="pc"/>            
+       </aop:aspect>
+   </aop:config>
+    -->
+</beans>

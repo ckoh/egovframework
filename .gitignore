@@ -1,0 +1,49 @@
+# workspace project file
+.metadata
+*/.project
+*/.settings
+*/.classpath
+*/.springBeans
+
+# projects
+eGofmvc/target
+eGof/target
+eTest_01_DI_OOP/target
+eTest_02_AOP/target
+eTest_03_DB/target
+eTest_04_MVC/target
+eTest_05_MVC/target
+
+eGofmvc/bin
+eGof/bin
+eTest_01_DI_OOP/bin
+eTest_02_AOP/bin
+eTest_03_DB/bin
+eTest_04_MVC/bin
+eTest_05_MVC/bin
+
+# etc project
+Servers
+RemoteSystemsTempFiles
+product
+sample
+
+# sencha
+*/.sencha
+*/.architect
+eGofExtjs/build
+eGofExtjs/ext
+eGofExtjs/packages
+eGofExtjs/sass
+eGofExtjs/bootstrap.css
+eGofExtjs/bootstrap.js
+eGofExtjs/bootstrap.json
+eGofExtjs/build.settings
+eGofExtjs/build.xml
+
+# sencha build
+eGofmvc/src/main/webapp/resources
+eGofmvc/src/main/webapp/app.js
+eGofmvc/src/main/webapp/app.json
+eGofmvc/src/main/webapp/index.html
+eGofmvc/src/main/webapp/
